@@ -6,108 +6,103 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {
-    margin: 0;
-    background-color: black;
-    overflow: hidden;
-    font-family: "Georgia", serif;
-    color: white;
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+    font-family:Georgia, serif;
+    color:white;
 }
 
-/* CAJA DE TEXTO (ZONA PROTEGIDA) */
-#mensaje {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 80%;
-    background-color: #0b1d3a;
-    border: 1px solid #4fa3ff;
-    padding: 18px 28px;
-    border-radius: 14px;
-    font-size: 1.2em;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(79,163,255,0.4);
-    z-index: 10;
+/* CAJA DE TEXTO */
+#mensaje{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    max-width:80%;
+    background:#0b1d3a;
+    border:1px solid #4fa3ff;
+    padding:18px 28px;
+    border-radius:14px;
+    font-size:1.2em;
+    text-align:center;
+    box-shadow:0 0 20px rgba(79,163,255,0.4);
+    z-index:10;
 }
 
 /* ESTRELLAS */
-.estrella {
-    position: absolute;
-    border-radius: 50%;
-    cursor: pointer;
+.estrella{
+    position:absolute;
+    border-radius:50%;
+    cursor:pointer;
 }
 
 /* Fondo */
-.fondo {
-    width: 10px;
-    height: 10px;
-    background: #fff4a3;
-    box-shadow: 0 0 6px #ffd700;
+.fondo{
+    width:10px;
+    height:10px;
+    background:#fff4a3;
+    box-shadow:0 0 6px #ffd700;
 }
 
 /* Orión */
-.orion {
-    width: 12px;
-    height: 12px;
-    background: #8fd3ff;
-    box-shadow: 0 0 10px #3fa9ff;
+.orion{
+    width:12px;
+    height:12px;
+    background:#8fd3ff;
+    box-shadow:0 0 10px #3fa9ff;
 }
 
-/* Explosión */
-@keyframes explosion {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(4); opacity: 0.8; }
-    100% { transform: scale(7); opacity: 0; }
+/* EXPLOSIÓN */
+@keyframes explosion{
+    0%{transform:scale(1);opacity:1;}
+    50%{transform:scale(4);opacity:.8;}
+    100%{transform:scale(7);opacity:0;}
 }
-
-.explotar {
-    animation: explosion 0.9s ease-out forwards;
+.explotar{
+    animation:explosion .9s ease-out forwards;
 }
 
 /* SATURNO */
-#saturno {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+#saturno{
+    display:none;
+    position:fixed;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
 }
-
-.planeta {
-    width: 120px;
-    height: 120px;
-    background: #cfae70;
-    border-radius: 50%;
-    box-shadow: 0 0 30px #cfae70;
-    margin: auto;
+.planeta{
+    width:120px;
+    height:120px;
+    background:#cfae70;
+    border-radius:50%;
+    box-shadow:0 0 30px #cfae70;
+    margin:auto;
 }
-
-.anillos {
-    width: 180px;
-    height: 40px;
-    border: 4px solid #d8c08a;
-    border-radius: 50%;
-    margin: -30px auto 20px;
+.anillos{
+    width:180px;
+    height:40px;
+    border:4px solid #d8c08a;
+    border-radius:50%;
+    margin:-30px auto 20px;
 }
-
-button {
-    font-size: 1.1em;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
+button{
+    font-size:1.1em;
+    padding:10px 20px;
+    margin:10px;
+    cursor:pointer;
 }
 
 /* FINALES */
-.feliz {
-    transform: scale(1.5);
-    box-shadow: 0 0 60px gold;
+.feliz{
+    transform:scale(1.5);
+    box-shadow:0 0 60px gold;
 }
-
-.agujero {
-    background: black;
-    box-shadow: 0 0 80px purple;
+.agujero{
+    background:black;
+    box-shadow:0 0 80px purple;
 }
 </style>
 </head>
@@ -121,96 +116,105 @@ button {
 <div id="saturno">
     <div class="planeta" id="planeta"></div>
     <div class="anillos"></div>
-    <div>
-        <h2>¿Te gustaría ser mi novia?</h2>
-        <button onclick="respuestaSi()">Sí</button>
-        <button onclick="respuestaNo()">No</button>
-    </div>
+    <h2>¿Te gustaría ser mi novia?</h2>
+    <button onclick="respuestaSi()">Sí</button>
+    <button onclick="respuestaNo()">No</button>
 </div>
 
 <script>
-const mensajesFondo = [
-    "Pensarte ilumina incluso el vacío.",
-    "Hay estrellas bonitas, pero ninguna como tú.",
-    "A veces el universo se siente más cercano contigo.",
-    "No todo lo entiendo, pero esto sí.",
-    "El cielo tiene sentido cuando pienso en ti."
+/* MENSAJES */
+const mensajesFondo=[
+ "Pensar en tu sonrisa es ver la Luna.",
+ "Hay estrellas bonitas, pero ninguna como tú.",
+ "Todo es más bonito a tu lado.",
+ "El cielo tiene sentido cuando pienso en ti.",
+ "Mi noche favorita es la que te incluye.",
+ "Eres mi constelación favorita.",
+ "Contigo el universo se siente pequeño."
 ];
 
-const mensajesOrion = [
-    "Desde que te vi, supe que me gustabas.",
-    "Luego noté tus ojos.",
-    "Después tu forma de ser.",
-    "Tu risa se volvió referencia.",
-    "Siempre eras tú.",
-    "No era azar, era gravedad.",
-    "Me gustas."
+const mensajesOrion=[
+ "Desde que te vi supe que eras especial.",
+ "Tus ojos fueron la primera señal.",
+ "Tu forma de ser cambió la órbita.",
+ "Tu sonrisa se volvió referencia.",
+ "Mirarte es mirar al cielo.",
+ "No era azar, era gravedad.",
+ "Eres mi punto fijo."
 ];
 
-const orionPos = [
-    {x:40,y:20},{x:55,y:22},{x:45,y:40},
-    {x:50,y:42},{x:55,y:44},{x:48,y:65},{x:60,y:68}
+const orionPos=[
+ {x:40,y:20},{x:55,y:22},{x:45,y:40},
+ {x:50,y:42},{x:55,y:44},{x:48,y:65},{x:60,y:68}
 ];
 
-let estrellasRestantes = 0;
-let indiceOrion = 0;
+let estrellasRestantes=0;
+let indiceFondo=0;
 
+/* PROTECCIÓN DE CAJA */
 function fueraDeCaja(x,y){
-    const caja = document.getElementById("mensaje").getBoundingClientRect();
-    return !(x > caja.left-30 && x < caja.right+30 &&
-             y > caja.top-30 && y < caja.bottom+30);
+ const caja=document.getElementById("mensaje").getBoundingClientRect();
+ return !(x>caja.left-30 && x<caja.right+30 &&
+          y>caja.top-30 && y<caja.bottom+30);
 }
 
+/* CREAR ESTRELLA */
 function crearEstrella(x,y,clase,mensaje){
-    const e = document.createElement("div");
-    e.className = "estrella " + clase;
-    e.style.left = x;
-    e.style.top = y;
-    estrellasRestantes++;
+ const e=document.createElement("div");
+ e.className="estrella "+clase;
+ e.style.left=x;
+ e.style.top=y;
+ estrellasRestantes++;
 
-    e.onclick = () => {
-        document.getElementById("mensaje").innerText = mensaje;
-        e.classList.add("explotar");
-        setTimeout(()=>e.remove(),900);
-        estrellasRestantes--;
-        if(estrellasRestantes===0) mostrarSaturno();
-    };
+ e.onclick=()=>{
+   document.getElementById("mensaje").innerText=mensaje;
+   e.classList.add("explotar");
+   setTimeout(()=>e.remove(),900);
+   estrellasRestantes--;
+   if(estrellasRestantes===0) mostrarSaturno();
+ };
 
-    document.body.appendChild(e);
+ document.body.appendChild(e);
 }
 
-/* Orión */
+/* ORIÓN (ORDEN FIJO) */
 orionPos.forEach((p,i)=>{
-    crearEstrella(p.x+"vw",p.y+"vh","orion",mensajesOrion[i]);
+ crearEstrella(p.x+"vw",p.y+"vh","orion",mensajesOrion[i]);
 });
 
-/* Fondo */
+/* FONDO (ORDEN SECUENCIAL CONTROLADO) */
 for(let i=0;i<35;i++){
-    let x,y;
-    do{
-        x=Math.random()*window.innerWidth;
-        y=Math.random()*window.innerHeight;
-    }while(!fueraDeCaja(x,y));
-    crearEstrella(x+"px",y+"px","fondo",
-        mensajesFondo[Math.floor(Math.random()*mensajesFondo.length)]);
+ let x,y;
+ do{
+   x=Math.random()*innerWidth;
+   y=Math.random()*innerHeight;
+ }while(!fueraDeCaja(x,y));
+
+ crearEstrella(
+   x+"px",
+   y+"px",
+   "fondo",
+   mensajesFondo[indiceFondo++ % mensajesFondo.length]
+ );
 }
 
+/* SATURNO */
 function mostrarSaturno(){
-    document.getElementById("mensaje").innerText =
-        "Todo colapsó en un solo punto…";
-    document.getElementById("saturno").style.display="block";
+ document.getElementById("mensaje").innerText=
+   "Todo colapsó en un solo punto…";
+ document.getElementById("saturno").style.display="block";
 }
 
 function respuestaSi(){
-    document.getElementById("planeta").classList.add("feliz");
-    document.getElementById("mensaje").innerText =
-        "Universo estable. Estado final: felicidad 💙";
+ document.getElementById("planeta").classList.add("feliz");
+ document.getElementById("mensaje").innerText=
+   "Universo estable. Estado final: felicidad 💙";
 }
 
 function respuestaNo(){
-    document.getElementById("planeta").classList.add("agujero");
-    document.getElementById("mensaje").innerText =
-        "Colapso gravitacional inevitable.";
+ document.getElementById("planeta").classList.add("agujero");
+ document.getElementById("mensaje").innerText=
+   "Colapso gravitacional inevitable.";
 }
 </script>
 

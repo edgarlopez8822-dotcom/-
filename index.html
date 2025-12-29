@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Mi Universo Eres Tú</title>
+<title>Mi Universo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
     body {
         margin: 0;
-        background: radial-gradient(circle at bottom, #020111 0%, #000000 70%);
+        background-color: black; /* espacio negro */
         overflow: hidden;
         font-family: Arial, sans-serif;
         color: white;
@@ -16,42 +16,23 @@
 
     .estrella {
         position: absolute;
-        width: 6px;
-        height: 6px;
-        background: white;
+        width: 10px;
+        height: 10px;
+        background: #fff6a5;
         border-radius: 50%;
         cursor: pointer;
-        box-shadow: 0 0 8px white;
-    }
-
-    .especial {
-        width: 14px;
-        height: 14px;
-        background: gold;
-        box-shadow: 0 0 15px gold;
+        box-shadow:
+            0 0 6px #fff6a5,
+            0 0 12px #ffd700;
     }
 
     #mensaje {
         position: fixed;
-        bottom: 20px;
+        bottom: 30px;
         width: 100%;
         text-align: center;
         font-size: 1.2em;
-    }
-
-    #pregunta {
-        display: none;
-        position: fixed;
-        top: 40%;
-        width: 100%;
-        text-align: center;
-    }
-
-    button {
-        padding: 10px 20px;
-        font-size: 1em;
-        margin: 10px;
-        cursor: pointer;
+        padding: 10px;
     }
 </style>
 </head>
@@ -60,65 +41,36 @@
 
 <div id="mensaje">Haz clic en una estrella ✨</div>
 
-<div id="pregunta">
-    <h2>¿Quieres ser mi novia?</h2>
-    <button onclick="dijoQueSi()">Sí</button>
-    <button id="btnNo" onmouseover="mueveElNo()">No</button>
-</div>
-
 <script>
-    const frases = [
-        "Desde que llegaste, mi universo dejó de expandirse al azar.",
-        "Mi atracción hacia ti no necesita constantes.",
-        "Eres la singularidad que curva mi espacio-tiempo.",
-        "Ni la luz escapa… pero yo no quiero escapar de ti."
+    const mensajes = [
+        "Tus ojos brillan más que cualquier estrella que haya observado.",
+        "Si el universo se expande, es porque intenta parecerse a tu sonrisa.",
+        "Tu cabello tiene el desorden perfecto de una galaxia espiral.",
+        "Entre millones de estrellas, mi atención siempre colapsa en ti.",
+        "El espacio es infinito, pero aún así encontré en ti mi lugar."
     ];
 
     function crearEstrellas(cantidad) {
         for (let i = 0; i < cantidad; i++) {
             const estrella = document.createElement("div");
             estrella.className = "estrella";
+
             estrella.style.left = Math.random() * window.innerWidth + "px";
             estrella.style.top = Math.random() * window.innerHeight + "px";
 
             estrella.onclick = () => {
-                document.getElementById("mensaje").innerText =
-                    frases[Math.floor(Math.random() * frases.length)];
+                const texto =
+                    mensajes[Math.floor(Math.random() * mensajes.length)];
+                document.getElementById("mensaje").innerText = texto;
             };
 
             document.body.appendChild(estrella);
         }
     }
 
-    function crearEstrellaEspecial() {
-        const estrella = document.createElement("div");
-        estrella.className = "estrella especial";
-        estrella.style.left = "50%";
-        estrella.style.top = "30%";
-
-        estrella.onclick = () => {
-            document.getElementById("mensaje").innerText =
-                "Has descubierto mi estrella favorita ⭐";
-            document.getElementById("pregunta").style.display = "block";
-        };
-
-        document.body.appendChild(estrella);
-    }
-
-    function dijoQueSi() {
-        alert("Confirmado experimentalmente: somos novios 💫");
-    }
-
-    function mueveElNo() {
-        const btn = document.getElementById("btnNo");
-        btn.style.position = "absolute";
-        btn.style.left = Math.random() * window.innerWidth + "px";
-        btn.style.top = Math.random() * window.innerHeight + "px";
-    }
-
-    crearEstrellas(60);
-    crearEstrellaEspecial();
+    crearEstrellas(50);
 </script>
 
 </body>
 </html>
+

@@ -63,47 +63,6 @@ body{
 .explotar{
     animation:explosion .9s ease-out forwards;
 }
-
-/* SATURNO */
-#saturno{
-    display:none;
-    position:fixed;
-    top:40%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-}
-.planeta{
-    width:120px;
-    height:120px;
-    background:#cfae70;
-    border-radius:50%;
-    box-shadow:0 0 30px #cfae70;
-    margin:auto;
-}
-.anillos{
-    width:180px;
-    height:40px;
-    border:4px solid #d8c08a;
-    border-radius:50%;
-    margin:-30px auto 20px;
-}
-button{
-    font-size:1.1em;
-    padding:10px 20px;
-    margin:10px;
-    cursor:pointer;
-}
-
-/* FINALES */
-.feliz{
-    transform:scale(1.5);
-    box-shadow:0 0 60px gold;
-}
-.agujero{
-    background:black;
-    box-shadow:0 0 80px purple;
-}
 </style>
 </head>
 
@@ -111,14 +70,6 @@ button{
 
 <div id="mensaje">
     Cada estrella guarda algo que quiero decirte ✨
-</div>
-
-<div id="saturno">
-    <div class="planeta" id="planeta"></div>
-    <div class="anillos"></div>
-    <h2>¿Te gustaría ser mi novia?</h2>
-    <button onclick="respuestaSi()">Sí</button>
-    <button onclick="respuestaNo()">No</button>
 </div>
 
 <script>
@@ -171,18 +122,18 @@ function crearEstrella(x,y,clase,mensaje){
    e.classList.add("explotar");
    setTimeout(()=>e.remove(),900);
    estrellasRestantes--;
-   if(estrellasRestantes===0) mostrarSaturno();
+   if(estrellasRestantes===0) finalPoetico();
  };
 
  document.body.appendChild(e);
 }
 
-/* ORIÓN (ORDEN FIJO) */
+/* ORIÓN */
 orionPos.forEach((p,i)=>{
  crearEstrella(p.x+"vw",p.y+"vh","orion",mensajesOrion[i]);
 });
 
-/* FONDO (ORDEN SECUENCIAL CONTROLADO) */
+/* FONDO */
 for(let i=0;i<35;i++){
  let x,y;
  do{
@@ -198,23 +149,10 @@ for(let i=0;i<35;i++){
  );
 }
 
-/* SATURNO */
-function mostrarSaturno(){
- document.getElementById("mensaje").innerText=
-   "Todo colapsó en un solo punto…";
- document.getElementById("saturno").style.display="block";
-}
-
-function respuestaSi(){
- document.getElementById("planeta").classList.add("feliz");
- document.getElementById("mensaje").innerText=
-   "Universo estable. Estado final: felicidad 💙";
-}
-
-function respuestaNo(){
- document.getElementById("planeta").classList.add("agujero");
- document.getElementById("mensaje").innerText=
-   "Colapso gravitacional inevitable.";
+/* FINAL POÉTICO */
+function finalPoetico(){
+ document.getElementById("mensaje").innerText =
+   "Todo colapsó en un solo punto… y ahí pensé en ti.";
 }
 </script>
 

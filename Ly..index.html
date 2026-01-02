@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Colapso del Universo</title>
+<title>Luz en mis noches</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -54,7 +54,7 @@ body{
     box-shadow:0 0 10px #3fa9ff;
 }
 
-/* EXPLOSIÓN DE ESTRELLAS */
+/* EXPLOSIÓN */
 @keyframes explosion{
     0%{transform:scale(1);opacity:1;}
     50%{transform:scale(4);opacity:.8;}
@@ -64,42 +64,34 @@ body{
     animation:explosion .9s ease-out forwards;
 }
 
-/* SUPERNOVA FINAL */
-#supernova{
+/* LUNA */
+#luna{
+    display:none;
     position:fixed;
-    inset:0;
-    background:black;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-50%);
     text-align:center;
-    font-size:2.4em;
-    padding:40px;
-    opacity:0;
-    pointer-events:none;
-    z-index:20;
+    z-index:5;
 }
 
-@keyframes supernova{
-    0%{
-        opacity:0;
-        transform:scale(0.2);
-        box-shadow:0 0 0 rgba(255,255,255,0);
-    }
-    40%{
-        opacity:1;
-        transform:scale(1.2);
-        box-shadow:0 0 200px rgba(255,255,255,0.9);
-    }
-    100%{
-        opacity:1;
-        transform:scale(1);
-        box-shadow:0 0 120px rgba(173,216,255,0.8);
-    }
+.luna{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%, #ffffff, #d9d9d9 60%, #bfbfbf);
+    box-shadow:0 0 40px rgba(255,255,255,.6);
+    margin:auto;
 }
 
-.supernova-activa{
-    animation:supernova 3.5s ease-out forwards;
+/* MENSAJE FINAL */
+#final{
+    margin-top:20px;
+    font-size:1.4em;
+    max-width:320px;
+    text-align:center;
+    color:#e6f2ff;
 }
 </style>
 </head>
@@ -110,9 +102,11 @@ body{
     Cada estrella guarda algo que quiero decirte ✨
 </div>
 
-<div id="supernova">
-    Tú eres la que se roba los latidos de mi corazón,<br>
-    eres tú la que me gusta.
+<div id="luna">
+    <div class="luna"></div>
+    <div id="final">
+        Eres la luz que ilumina mis noches cuando pienso en ti
+    </div>
 </div>
 
 <script>
@@ -165,7 +159,7 @@ function crearEstrella(x,y,clase,mensaje){
    e.classList.add("explotar");
    setTimeout(()=>e.remove(),900);
    estrellasRestantes--;
-   if(estrellasRestantes===0) finalSupernova();
+   if(estrellasRestantes===0) mostrarLuna();
  };
 
  document.body.appendChild(e);
@@ -192,15 +186,13 @@ for(let i=0;i<35;i++){
  );
 }
 
-/* FINAL SUPERNOVA */
-function finalSupernova(){
+/* LUNA FINAL */
+function mostrarLuna(){
  document.getElementById("mensaje").innerText =
-   "El universo no resistió…";
- const s=document.getElementById("supernova");
- s.classList.add("supernova-activa");
+   "Y al final, todo el cielo quedó en silencio…";
+ document.getElementById("luna").style.display="block";
 }
 </script>
 
 </body>
 </html>
-
